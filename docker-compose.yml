@@ -33,7 +33,7 @@ services:
          volumes:
           - /data/docker-storage/redis-data:/data
     gitlabce:
-        image: 'gitlab/gitlab-ce:latest'
+        image: 'twang2218/gitlab-ce-zh:latest'
         restart: always
         ports:
         - "10080:80"
