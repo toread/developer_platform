@@ -1,0 +1,24 @@
+version: '2'
+services:
+    openldap:
+        image: osixia/openldap
+        environment:
+          - LDAP_ORGANISATION=${LDAP_ORGANISATION}
+          - LDAP_DOMAIN=${LDAP_DOMAIN}
+          - LDAP_ADMIN_PASSWORD=${LDAP_ADMIN_PASSWORD}
+          - LDAP_TLS=${LDAP_TLS}
+          - LDAP_READONLY_USER=${LDAP_READONLY_USER}
+        ports:
+          - "389:389"
+          - "636:636"
+        volumes:
+          - /data/docker-storage/openldap-server/ldap:/var/lib/ldap
+          - /data/docker-storage/openldap-server/slapd.d:/etc/ldap/slapd.d
+    ldap-account-admin:
+        image: aexoti/lam
+        depends_on:
+          - openldap
+        ports:
+          - "8888:80"
+        volumes:
+          - /data/docker-storage/lam:/var/lib/ldap-account-manager/config
