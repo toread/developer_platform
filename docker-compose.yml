@@ -1,19 +1,16 @@
 version: '2'
 services:
     openldap:
-        image: osixia/openldap
+        image: dinkel/openldap
         environment:
-          - LDAP_ORGANISATION=${LDAP_ORGANISATION}
-          - LDAP_DOMAIN=${LDAP_DOMAIN}
-          - LDAP_ADMIN_PASSWORD=${LDAP_ADMIN_PASSWORD}
-          - LDAP_TLS=${LDAP_TLS}
-          - LDAP_READONLY_USER=${LDAP_READONLY_USER}
+          - SLAPD_ORGANIZATION=开发者平台
+          - SLAPD_DOMAIN=devpt.ltd
+          - SLAPD_PASSWORD=toread
         ports:
           - "389:389"
-          - "636:636"
         volumes:
-          - /data/docker-storage/openldap-server/ldap:/var/lib/ldap
-          - /data/docker-storage/openldap-server/slapd.d:/etc/ldap/slapd.d
+          - /data/docker-storage/openldap-server/config:/etc/ldap
+          - /data/docker-storage/openldap-server/data:/var/lib/ldap
     ldap-account-admin:
         image: aexoti/lam
         depends_on:
@@ -22,3 +19,26 @@ services:
           - "8888:80"
         volumes:
           - /data/docker-storage/lam:/var/lib/ldap-account-manager/config
+    postgres:
+        image: postgres
+        restart: always
+        volumes:
+          - /data/docker-storage/postgres-data:/var/lib/postgresql/data
+          - ./docker-entrypoint-initdb.d/init-user-db.sh:/docker-entrypoint-initdb.d/init-user-db.sh
+        environment:
+          POSTGRES_USER:  postgres
+          POSTGRES_PASSWORD: toread
+    redis:
+         image: redis
+         volumes:
+          - /data/docker-storage/redis-data:/data
+    gitlabce:
+        image: 'gitlab/gitlab-ce:latest'
+        restart: always
+        ports:
+        - "10080:80"
+        - "10022:22"
+        volumes:
+          - /data/docker-storage/gitlab-config:/etc/gitlab
+          - /data/docker-storage/gitlab-logs:/var/log/gitlab
+          - /data/docker-storage/gitlab-data:/var/opt/gitlab
