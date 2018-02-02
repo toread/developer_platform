@@ -188,7 +188,7 @@
 ### GitLab Mattermost
 ###! These settings are void if Mattermost is installed on the same omnibus
 ###! install
-# gitlab_rails['mattermost_host'] = "https://mattermost.example.com"
+gitlab_rails['mattermost_host'] = "http://toread.jios.org:30080"
 
 ### LDAP Settings
 ###! Docs: https://docs.gitlab.com/omnibus/settings/ldap.html
@@ -1059,7 +1059,7 @@ user["git_user_email"] = "gitlab@devpt.ltd"
 ##! Docs: https://docs.gitlab.com/omnibus/gitlab-mattermost
 ################################################################################
 
-# mattermost_external_url 'http://mattermost.example.com'
+mattermost_external_url 'http://toread.jios.org:30080'
 
 # mattermost['enable'] = false
 # mattermost['username'] = 'mattermost'
@@ -1148,13 +1148,13 @@ user["git_user_email"] = "gitlab@devpt.ltd"
 # mattermost['log_file_format'] = nil
 # mattermost['log_enable_diagnostics'] = true
 
-# mattermost['gitlab_enable'] = false
-# mattermost['gitlab_id'] = "12345656"
-# mattermost['gitlab_secret'] = "123456789"
-# mattermost['gitlab_scope'] = ""
-# mattermost['gitlab_auth_endpoint'] = "http://gitlab.example.com/oauth/authorize"
-# mattermost['gitlab_token_endpoint'] = "http://gitlab.example.com/oauth/token"
-# mattermost['gitlab_user_api_endpoint'] = "http://gitlab.example.com/api/v4/user"
+mattermost['gitlab_enable'] = false
+mattermost['gitlab_id'] = "2387834b3685bf8249f616293448833506a38c5f315c079ba112ab5ad54f5e9d"
+mattermost['gitlab_secret'] = "1770b822ade43c24247ca37c8c97b748369afa4b118f803af1e87ded22f178eb"
+mattermost['gitlab_scope'] = ""
+mattermost['gitlab_auth_endpoint'] = "	http://toread.jios.org:10080/oauth/authorize"
+mattermost['gitlab_token_endpoint'] = "http://toread.jios.org:10080/oauth/token"
+mattermost['gitlab_user_api_endpoint'] = "http://toread.jios.org:10080/api/v4/user"
 
 # mattermost['aws'] = {'S3AccessKeyId' => '123', 'S3SecretAccessKey' => '123', 'S3Bucket' => 'aa', 'S3Region' => 'bb'}
 

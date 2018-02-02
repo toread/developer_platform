@@ -12,7 +12,7 @@ services:
           - /data/docker-storage/openldap-server/config:/etc/ldap
           - /data/docker-storage/openldap-server/data:/var/lib/ldap
     ldap-account-admin:
-        image: aexoti/lam
+        build: ./docker-ldap-account-manager
         depends_on:
           - openldap
         ports:
@@ -34,6 +34,10 @@ services:
           - /data/docker-storage/redis-data:/data
     gitlabce:
         image: 'twang2218/gitlab-ce-zh:latest'
+        depends_on:
+          - redis
+          - postgres
+          - openldap
         restart: always
         ports:
         - "10080:80"
@@ -42,3 +46,19 @@ services:
           - /data/docker-storage/gitlab-config:/etc/gitlab
           - /data/docker-storage/gitlab-logs:/var/log/gitlab
           - /data/docker-storage/gitlab-data:/var/opt/gitlab
+    mattermost:
+        image: mattermost/mattermost-prod-app:3.9.0
+        depends_on:
+          - postgres
+        environment:
+          MATTERMOST_ENABLE_SSL: "true"
+          DB_HOST: postgres
+          MM_DBNAME: mattermost
+          MM_USERNAME: mattermost
+          MM_PASSWORD: mattermost
+        ports:
+          - "30080:80"
+        volumes:
+          - /data/docker-storage/mattermost-data:/mattermost/data
+          - /data/docker-storage/mattermost-config:/mattermost/config
+

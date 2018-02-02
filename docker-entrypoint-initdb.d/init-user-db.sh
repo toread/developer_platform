@@ -4,4 +4,8 @@ psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" <<-EOSQL
     CREATE DATABASE gitlab;
 	CREATE EXTENSION pg_trgm;
     GRANT ALL PRIVILEGES ON DATABASE gitlab TO gitlab;
+    -- mattermost
+    CREATE USER mattermost PASSWORD 'mattermost';
+    CREATE DATABASE mattermost;
+    GRANT ALL PRIVILEGES ON DATABASE mattermost TO mattermost;
 EOSQL
