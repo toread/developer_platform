@@ -1061,7 +1061,7 @@ user["git_user_email"] = "gitlab@devpt.ltd"
 
 mattermost_external_url 'http://toread.jios.org:30080'
 
-# mattermost['enable'] = false
+mattermost['enable'] = true
 # mattermost['username'] = 'mattermost'
 # mattermost['group'] = 'mattermost'
 # mattermost['uid'] = nil
