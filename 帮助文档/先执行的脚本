@@ -1,0 +1,1 @@
+sudo  mkdir /data/docker-storage/nexus-data/ && sudo  chown -R 200 /data/docker-storage/nexus-data/
