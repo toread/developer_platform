@@ -805,7 +805,7 @@ user["git_user_email"] = "gitlab@devpt.ltd"
 
 ##! When bundled nginx is disabled we need to add the external webserver user to
 ##! the GitLab webserver group.
-web_server['external_users'] = ['nginx']
+# web_server['external_users'] = []
 # web_server['username'] = 'gitlab-www'
 # web_server['group'] = 'gitlab-www'
 # web_server['uid'] = nil
@@ -818,7 +818,7 @@ web_server['external_users'] = ['nginx']
 ##! Docs: https://docs.gitlab.com/omnibus/settings/nginx.html
 ################################################################################
 
-nginx['enable'] = false
+# nginx['enable'] = true
 # nginx['client_max_body_size'] = '250m'
 # nginx['redirect_http_to_https'] = false
 # nginx['redirect_http_to_https_port'] = 80
@@ -857,7 +857,7 @@ nginx['enable'] = false
 
 ##! **Override only if you use a reverse proxy**
 ##! Docs: https://docs.gitlab.com/omnibus/settings/nginx.html#setting-the-nginx-listen-port
-# nginx['listen_port'] = nil
+nginx['listen_port'] = 88
 
 ##! **Override only if your reverse proxy internally communicates over HTTP**
 ##! Docs: https://docs.gitlab.com/omnibus/settings/nginx.html#supporting-proxied-ssl
