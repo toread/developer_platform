@@ -1,31 +1,5 @@
 version: '2'
 services:
-    nginx:
-        build: nginx
-        ports:
-          - "88:88"
-        environment:
-          REVERSE_PROXY_DOMAIN_NAME: devpt.ltd
-        depends_on:
-          - nexus
-          - mattermost
-          - gitlabce
-          - account
-          - sonarqube
-          - owncloud
-    redis:
-         image: redis
-         volumes:
-          - /data/docker-storage/redis-data:/data
-    postgres:
-        image: postgres
-        restart: always
-        volumes:
-          - /data/docker-storage/postgres-data:/var/lib/postgresql/data
-          - ./docker-entrypoint-initdb.d/init-user-db.sh:/docker-entrypoint-initdb.d/init-user-db.sh
-        environment:
-          POSTGRES_USER:  postgres
-          POSTGRES_PASSWORD: toread
     openldap:
         image: dinkel/openldap
         environment:
@@ -37,12 +11,27 @@ services:
         volumes:
           - /data/docker-storage/openldap-server/config:/etc/ldap
           - /data/docker-storage/openldap-server/data:/var/lib/ldap
-    account:
+    ldap-account-admin:
         build: ./docker-ldap-account-manager
         depends_on:
           - openldap
+        ports:
+          - "8888:80"
         volumes:
           - /data/docker-storage/lam:/var/lib/ldap-account-manager/config
+    postgres:
+        image: postgres
+        restart: always
+        volumes:
+          - /data/docker-storage/postgres-data:/var/lib/postgresql/data
+          - ./docker-entrypoint-initdb.d/init-user-db.sh:/docker-entrypoint-initdb.d/init-user-db.sh
+        environment:
+          POSTGRES_USER:  postgres
+          POSTGRES_PASSWORD: toread
+    redis:
+         image: redis
+         volumes:
+          - /data/docker-storage/redis-data:/data
     gitlabce:
         image: 'twang2218/gitlab-ce-zh:latest'
         depends_on:
@@ -50,6 +39,9 @@ services:
           - postgres
           - openldap
         restart: always
+        ports:
+        - "10080:80"
+        - "10022:22"
         volumes:
           - /data/docker-storage/gitlab-config:/etc/gitlab
           - /data/docker-storage/gitlab-logs:/var/log/gitlab
@@ -64,31 +56,9 @@ services:
           MM_DBNAME: mattermost
           MM_USERNAME: mattermost
           MM_PASSWORD: mattermost
+        ports:
+          - "30080:80"
         volumes:
           - /data/docker-storage/mattermost-data:/mattermost/data
           - /data/docker-storage/mattermost-config:/mattermost/config
-    nexus:
-        image: sonatype/nexus3
-        depends_on:
-          - openldap
-        volumes:
-          - /data/docker-storage/nexus-data:/nexus-data
-    sonarqube:
-        image: sonarqube
-        ports:
-          - "192:9092"
-        environment:
-          - SONARQUBE_JDBC_USERNAME=sonarqube
-          - SONARQUBE_JDBC_PASSWORD=sonarqube
-          - SONARQUBE_JDBC_URL=jdbc:postgresql://postgres:5432/sonarqube
-        volumes:
-          - /data/docker-storage/sonarqube/conf:/opt/sonarqube/conf
-          - /data/docker-storage/sonarqube/data:/opt/sonarqube/data
-          - /data/docker-storage/sonarqube/extensions:/opt/sonarqube/extensions
-          - /data/docker-storage/sonarqube/plugins:/opt/sonarqube/lib/bundled-plugins
-    owncloud:
-      image: owncloud
-      volumes:
-        - /data/docker-storage/owncloud/data:/var/www/html/data
-        - /data/docker-storage/owncloud/config:/var/www/html/config
-        - /data/docker-storage/owncloud/apps:/var/www/html/apps
+
