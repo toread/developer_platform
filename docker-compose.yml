@@ -18,7 +18,7 @@ services:
          volumes:
           - /data/docker-storage/redis-data:/data
     postgres:
-        image: postgres:9.6
+        image: postgres
         restart: always
         volumes:
           - /data/docker-storage/postgres-data:/var/lib/postgresql/data
@@ -75,8 +75,6 @@ services:
           - /data/docker-storage/nexus-data:/nexus-data
     sonarqube:
         image: sonarqube
-        depends_on:
-          - postgres
         ports:
           - "192:9092"
         environment:
@@ -90,8 +88,6 @@ services:
           - /data/docker-storage/sonarqube/plugins:/opt/sonarqube/lib/bundled-plugins
     owncloud:
       image: owncloud
-      depends_on:
-        - postgres
       volumes:
         - /data/docker-storage/owncloud/data:/var/www/html/data
         - /data/docker-storage/owncloud/config:/var/www/html/config
