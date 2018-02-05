@@ -1,2 +1,3 @@
 sudo  mkdir /data/docker-storage/nexus-data/ && sudo  chown -R 200 /data/docker-storage/nexus-data/
 sudo  cp lam/lam.conf /data/docker-storage/lam/
+sudo cp  gitlab/gitlab.rb /data/docker-storage/gitlab-config/
