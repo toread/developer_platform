@@ -6,6 +6,8 @@ services:
           - "88:88"
         environment:
           REVERSE_PROXY_DOMAIN_NAME: devpt.ltd:88
+          NGINX_HOST=devpt.ltd:88
+          NGINX_PORT=88
         depends_on:
           - nexus
           - mattermost
