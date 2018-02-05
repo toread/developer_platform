@@ -3,17 +3,34 @@
 <head>
 <meta charset="utf-8"/>
 </head>
+<style>
+    ul.sys li{
+        float: left;
+        text-align: center;
+        vertical-align: center;
+        margin-left: 50px;
+
+    }
+</style>
 <body>
 
-<h1>DevOps Compose</h1>
-
+<h1>开发平台-服务列表</h1>
+<p>
+    以下是开发所需要的一些开源软件集成,未来会做一些特性的东西
+</p>
 <ul>
-    <li><a href="//gitlab.REVERSE_PROXY_DOMAIN_NAME:88">代码管理工具</a></li>
-    <li><a href="//mattermost.REVERSE_PROXY_DOMAIN_NAME:88">团队交流平台</a></li>
-    <li><a href="//sonarQube.REVERSE_PROXY_DOMAIN_NAME:88">代码质量管理SonarQube</a></li>
-    <li><a href="//owncloud.REVERSE_PROXY_DOMAIN_NAME:88">文件共享存储</a></li>
-    <li><a href="//nexus.REVERSE_PROXY_DOMAIN_NAME:88">maven私服</a></li>
-    <li><a href="//account.REVERSE_PROXY_DOMAIN_NAME:88">ldap账户管理</a></li>
+    <li>基于LDAP及gitlab的单点登录(集成功能)</li>
+    <li>基于gitlab的需求迭代</li>
+    <li>基于gitlab及K8S的CI CD功能</li>
+</ul>
+
+<ul class="sys">
+    <li><a href="//gitlab.REVERSE_PROXY_DOMAIN_NAME:88"  target="_blank">代码管理工具</a></li>
+    <li><a href="//mattermost.REVERSE_PROXY_DOMAIN_NAME:88"  target="_blank">团队交流平台</a></li>
+    <li><a href="//sonarQube.REVERSE_PROXY_DOMAIN_NAME:88"  target="_blank">代码质量管理SonarQube</a></li>
+    <li><a href="//owncloud.REVERSE_PROXY_DOMAIN_NAME:88"  target="_blank">文件共享存储</a></li>
+    <li><a href="//nexus.REVERSE_PROXY_DOMAIN_NAME:88/nexus"  target="_blank">maven私服</a></li>
+    <li><a href="//account.REVERSE_PROXY_DOMAIN_NAME:88/lam"  target="_blank">ldap账户管理</a></li>
 </ul>
 
 </body>
