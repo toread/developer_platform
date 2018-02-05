@@ -3,9 +3,9 @@ services:
     nginx:
         build: nginx
         ports:
-          - "80:80"
+          - "88:80"
         environment:
-          REVERSE_PROXY_DOMAIN_NAME: devpt.ltd
+          REVERSE_PROXY_DOMAIN_NAME: devpt.ltd:88
         depends_on:
           - nexus
           - mattermost
