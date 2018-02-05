@@ -4,7 +4,6 @@ services:
         build: nginx
         ports:
           - "88:88"
-          - "81:80"
         environment:
           REVERSE_PROXY_DOMAIN_NAME: devpt.ltd:88
         depends_on:
