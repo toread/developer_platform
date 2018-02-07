@@ -18,7 +18,7 @@ services:
          volumes:
           - /data/docker-storage/redis-data:/data
     postgres:
-        image: postgres
+        image: postgres:9.6
         restart: always
         volumes:
           - /data/docker-storage/postgres-data:/var/lib/postgresql/data
